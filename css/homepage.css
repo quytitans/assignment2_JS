@@ -1,0 +1,36 @@
+header{
+    height: 10%;
+}
+.bgBody{
+    background-image: url("https://res.cloudinary.com/quynv300192/image/upload/v1615913368/HTML_CSS_JS_Assignment02/triangles-1430105_dbkldc.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+}
+.mainMenu{
+    height: 40%;
+    border-radius: 50px;
+}
+.logo{
+    display: block;
+    width: 80%;
+}
+img.imgThumnail{
+border-radius: 50px;
+border:5px #e83e8c solid;
+}
+.center {
+    margin: auto;
+    padding: 10px;
+}
+.alignAudio {
+    display: block;
+    min-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+audio{
+    width: 30%;
+}
