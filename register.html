@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register - Songs I Like</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body class="bg-page">
+    <div class="col-12 col-sm-10 mainBody container-sm ">
+        <div class="divMain col-12 col-sm-12 col-md-12">
+            <h1 class="txtinsetshadow">NYC REGISTER FORM</h1>
+        </div>
+        <form action="#" name="mainForm">
+            <div class="form-row divMain col-12 col-sm-12 col-md-12">
+                <div class="form-group col-12 col-sm-4">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <span id="msgChekingEmail"></span>
+                </div>
+                <div class="form-group col-12 col-sm-3">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="password">
+                    <span id="msgChekingPassword"></span>
+                </div>
+                <div class="form-group col-12 col-sm-5">
+                    <label>Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="confirmPassword">
+                    <span id="msgChekingConfirmPassword"></span>
+                </div>
+            </div>
+            <div class="form-row divMain col-12 col-sm-12 col-md-12">
+                <div class="form-group col-12 col-sm-6">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="A">
+                    <span id="msgChekingFirstName"></span>
+                </div>
+                <div class="form-group col-12 col-sm-6">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Nguyen Van">
+                    <span id="msgChekingLastName"></span>
+                </div>
+            </div>
+            <div class="form-row divMain col-12 col-sm-12 col-md-12">
+                <div class="form-group col-12 col-sm-4">
+                    <label>Birth Day</label>
+                    <input type="date" class="form-control" id="birthday" >
+                </div>
+                <div class="form-group col-12 col-sm-4">
+                    <label class="col-12 col-sm-12">Gender</label>
+                    <select class="form-control ol-12 col-sm-12" id="gender" >
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                        <option value="2">Other</option>
+                        <option value="" selected>male/female</option>
+                    </select>
+                </div>
+                <div class="form-group col-12 col-sm-4">
+                    <label>Phone Number</label>
+                    <input type="text" class="form-control" id="phone" placeholder="phone number">
+                </div>
+            </div>
+            <div class="form-row divMain col-12 col-sm-12 col-md-12">
+                <div class="form-group col-12 col-sm-12">
+                    <label>Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="address">
+                </div>
+            </div>
+            <div class="form-row divMain col-12 col-sm-12 col-md-12">
+                <div class="form-group col-12 col-sm-12">
+                    <label>Avatar</label>
+                    <input type="url" class="form-control" id="avatar" placeholder="url">
+                    <span id="msgChekingNull">Check Null</span>
+                </div>
+            </div>
+            <div class="form-row divMain col-12 col-sm-12 col-md-12">
+                <div class="form-group col-12 col-sm-12">
+                    <input class="btn btn-primary btn-lg" type="button" value="Submit" id="submit">
+                    <input class="btn btn-primary btn-lg" type="reset" value="Reset Form" id="resetInformation">
+                </div>
+
+            </div>
+            <div class="divBlock"><a href="login.html" target="_blank">Login</a></div>
+
+        </form>
+        <!-- Modal hoàn thiện form -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="valiModal">Please complete all information</h2>
+                    </div>
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal thông báo đăng kí thành công -->
+        <div class="modal fade" id="completeModal01" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="valiModalSuccess">Sign Up Success</h2>
+                    </div>
+                    <div class="modal-footer">
+                        <h4 class="divBlock">thêm nút view my profile</h4>
+                        <div class="divBlock"><a href="login.html">Login</a></div>
+                        <div class="divBlock"><a href="lastestSong_homepage.html">Home page</a></div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal thông báo đăng kí thất bại -->
+        <div class="modal fade" id="faileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="valiModalFaile">Registration failed, please try again</h2>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="divBlock"><a href="lastestSong_homepage.html">Home page</a></div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/register.js"></script>
+</body>
+</html>
