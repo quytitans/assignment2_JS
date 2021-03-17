@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My songs</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/get-my-song.css">
+</head>
+<body class="bg-page">
+<div class="row container-fluid mainDiv">
+    <div class="btn-group container-fluid row col-12 col-sm-3 col-md-2 " style="max-height: 90px">
+        <button type="button" id="home" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            Home
+        </button>
+        <button type="button" id="create" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            Create new song
+        </button>
+        <button type="button" id="songs" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            NYC's Song
+        </button>
+    </div>
+    <div class="col-12 col-sm-9 col-md-10 mainBody container-fluid row ">
+        <div class="col-12 col-sm-12">
+            <h1 class="txtinsetshadow">MY SONG</h1>
+        </div>
+
+        <!--        hiển thị các ca khúc tải về-->
+        <div id="mysongs" class="col-12 col-sm-12 row container-fluid"></div>
+    </div>
+</div>
+<!--modal thong bao-->
+<div class="modal fade" id="NoitiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2 class="valiModal" id="txtNoitification">Please login first</h2>
+            </div>
+            <div class="modal-footer">
+                <div class="col-12 col-sm-12"><a href="homePage.html">Back to homepage</a></div>
+                <div class="col-12 col-sm-12"><a href="login.html">Login</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/get-my-song.js"></script>
+</body>
+</html>
