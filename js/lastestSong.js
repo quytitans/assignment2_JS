@@ -1,14 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("loadingIcon").style.display = ""
+        document.getElementById("home").onclick = function () {window.location.href = "homePage.html";}
+        document.getElementById("create").onclick = function () {window.location.href = "createSong.html";}
+        document.getElementById("songs").onclick = function () {window.location.href = "get-my-song.html";}
+        var tokenKey = sessionStorage.getItem("vie");
         var loginChecking = sessionStorage.getItem("vie2")
-        if (loginChecking !== "y"){
-            document.getElementById("txtNoitification").innerText="Please login first"
+        const API_DOMAIN = "https://2-dot-backup-server-001.appspot.com";
+        const SONG_PATH = "/_api/v2/songs";
+        if (loginChecking !== "y") {
+            document.getElementById("loadingIcon").style.display = "none"
+            document.getElementById("txtNoitification").innerText = "Please login first"
             $('#NoitiModal').modal({
                 show: true
             })
         }
-        const API_DOMAIN = "https://2-dot-backup-server-003.appspot.com";
-        const SONG_PATH = "/_api/v2/songs";
-        var tokenKey = sessionStorage.getItem("vie");
 // -----------------------------------------------------------------------------
         var xhr = new XMLHttpRequest();
         var divResult = document.getElementById("mysongs");
@@ -16,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr.onreadystatechange = function () {
             if (this.readyState === 4) {
                 if (this.status === 200) {
-                    //ket qua tra ve duoc chuyen sang dinh dang JS object;
+                    document.getElementById("loadingIcon").style.display = "none"
                     var responseJSobj = JSON.parse(this.responseText);
                     for (var i = 0; i < responseJSobj.length; i++) {
                         var author01 = responseJSobj[i].author;
@@ -25,7 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         var imgThumbnail01 = responseJSobj[i].thumbnail;
                         var name01 = responseJSobj[i].name;
                         realResult +=
-                            `<div class="col-12 col col-sm-6 col-md-4 row">
+                            `<div class="col-12 col col-sm-6 col-md-4 musicItem">
+                        <div class="row">
                                 <div class="col-12 col-sm-12 divIMG">
                                     <img class="imgThumnail01" src="${imgThumbnail01}" alt="" onclick="showVideo()" data-toggle="modal" data-target="#staticBackdrop">
                                 </div>
@@ -42,41 +48,22 @@ document.addEventListener("DOMContentLoaded", function () {
                                     <source src="${link01}" type="audio/mpeg">
                                     </audio>
                                 </div>   
+                        </div>
+                                
                             </div>`
                     }
                     divResult.innerHTML = realResult;
                 } else {
+                    document.getElementById("loadingIcon").style.display = "none"
                     console.log("co loi xay ra hay kiem tra lai");
-                    document.getElementById("txtNoitification").innerText="something's wrong please check and try again"
-                    $('#NoitiModal').modal({
-                        show: true
-                    })
+                    document.getElementById("txtNoitification").innerText = "something's wrong please check and try again"
+                    $('#NoitiModal').modal({show: true})
                 }
             }
         }
         xhr.open("GET", API_DOMAIN + SONG_PATH);
-        //Xác định kiểu dữ liệu gửi lên
         xhr.setRequestHeader("Content-Type", "application/json")
-        //chỉ active khi có key
         xhr.setRequestHeader("Authorization", `Basic ${tokenKey}`)
         xhr.send();
-
-        //Hàm mở video và show vào modal
-        function showVideo(IDvideo, title01) {
-            iFrame01.src = "https://www.youtube.com/embed/" + IDvideo;
-            document.getElementById("titleModal").innerText = title01;
-            // = title01
-        }
-
-        //Hàm đóng video trong modal xóa source
-        function closeVideo() {
-            iFrame01.src = "";
-        }
     }
 )
-
-
-
-
-
-

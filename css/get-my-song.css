@@ -1,25 +1,23 @@
 * {
     box-sizing: border-box;
 }
-
-.mainBody {
-    background-color: rgba(156, 39, 176, 0.57);
-}
 .mainDiv{
     margin: 0;
     padding: 0;
     border: 0;
 }
-.bg-page {
-    /* The image used */
+
+.bgBody{
     background-image: url("https://res.cloudinary.com/quynv300192/image/upload/v1615913368/HTML_CSS_JS_Assignment02/triangles-1430105_dbkldc.png");
-    /* Full height */
-    height: 100%;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
+    object-fit: cover;
+    width: 100%;
+    height: 100vh;
     background-size: cover;
-   }
+    background-position: center;
+    position: relative;
+    overflow: scroll;
+}
 
 label {
     font-weight: bold;
@@ -34,8 +32,6 @@ h1 {
 }
 
 .txtinsetshadow {
-    /*text-align: center;*/
-    /*text-shadow: -1px -1px 1px #eedc85, 2px 2px 1px #301206;*/
     text-align: center;
     font-size: 40px;
     height: 100px;
@@ -64,6 +60,7 @@ h1 {
     height: 100%;
     float: left;
     cursor: pointer;
+
 }
 h2.songName{
     font-size: large;
@@ -83,4 +80,38 @@ h2.valiModal {
     color: #b32020;
     font-size: medium;
     text-align-all: center;
+}
+.center {
+    margin: auto;
+    padding: 10px;
+}
+button {
+    float: left;
+    color: #fbfcfd;
+    background: transparent;
+    border-radius: 20px;
+    border: 1px solid #fbfcfd;
+    outline: none;
+    cursor: pointer;
+    opacity: 0.8;
+}
+button:hover{
+    background-color: #005cbf;
+    opacity: 1;
+    cursor: pointer;
+}
+span{
+    alignment: center;
+}
+.divTitle{
+    height: fit-content;
+}
+img.logo{
+    width: 100%;
+}
+.musicItem{
+
+    border-radius: 15px;
+    background-color: rgba(156, 39, 176, 0.57);
+    margin-bottom: 15px;
 }

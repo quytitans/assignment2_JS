@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var checkNull = true;
-    const API_DOMAIN = "https://2-dot-backup-server-003.appspot.com";
+    const API_DOMAIN = "https://2-dot-backup-server-001.appspot.com";
     const REGISTER_PATH = "/_api/v2/members";
     var email = document.getElementById("email");
     var password = document.getElementById("password")
@@ -13,9 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
     var gender = document.getElementById("gender")
     var birthday = document.getElementById("birthday")
     var btnSubmit = document.getElementById("submit")
+    var btnHomePage = document.getElementById("homepage02")
 // -----------------------------------------------------------------------------
-//Gửi data đi on button click;
+    btnHomePage.onclick = function () {
+        window.location.href = "homePage.html";
+    };
+//submit on button click;
     btnSubmit.onclick = function () {
+        document.getElementById("loadingIcon").style.display = ""
         var txtEmail = email.value;
         var txtPassword = password.value;
         var txtLastName = lastName.value;
@@ -25,10 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
         var urlAvatar = avatar.value;
         var txtGender = gender.value;
         var txtBirthday = birthday.value;
+        var txtBirthdayConvertType = txtBirthday.replace(/(\d\d)\/(\d\d)\/(\d{4})/, "$3-$1-$2");
         if (txtBirthday === "" || txtPassword === "" || txtLastName === "" || txtFirstName === "" || txtAddress === "" || txtPhone === "" || urlAvatar === "" || txtGender === "" || txtBirthday === "") {
-            $('#exampleModal').modal({
-                show: true
-            })
+            document.getElementById("loadingIcon").style.display = "none"
+            document.getElementById("txtNoitification").innerText = "Please complete all information"
+            $('#NoitiModal').modal({show: true})
         } else {
             // JS object
             var sendData = {
@@ -40,36 +45,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 avatar: urlAvatar,
                 gender: txtGender,
                 email: txtEmail,
-                birthday: txtBirthday
+                birthday: txtBirthdayConvertType
             }
-            //Chuyen data sang JSon Obj
+            console.log(sendData)
             var JSonDataSend = JSON.stringify(sendData);
-            //khởi tạo biến, mở kết nối, tạo header ... và chuyển dữ liệu trả về sang JS object;
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status === 201) {
-                        //ket qua tra ve duoc chuyen sang dinh dang JS object;
-                        var responseJSobj = JSON.parse(this.responseText);
-                        console.log(responseJSobj);
-                        $('#completeModal01').modal({
-                            show: true
-                        })
+                        document.getElementById("txtNoitification").innerText = "Registration Success"
+                        document.getElementById("loadingIcon").style.display = "none"
+                        $('#NoitiModal').modal({show: true})
                     } else {
+                        document.getElementById("loadingIcon").style.display = "none"
                         console.log("co loi xay ra hay kiem tra lai");
-                        $('#faileModal').modal({
-                            show: true
-                        })
+                        document.getElementById("txtNoitification").innerText = "Sign up failed Please try again"
+                        $('#NoitiModal').modal({show: true})
                     }
                 }
             }
             xhr.open("POST", API_DOMAIN + REGISTER_PATH);
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.send(JSonDataSend);
-
         }
     }
-    // validation-------------------------------------------------------------------
+// validation-------------------------------------------------------------------
 //kiem tra email
     var msgChekingEmail = document.getElementById("msgChekingEmail");
     email.onkeyup = validateEmail;
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-//Kiểm tra password
+//Validate password
     var msgCheckingPassword = document.getElementById("msgChekingPassword");
     password.onkeyup = validatePassword;
 
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-// Kiểm tra confirm_password
+// Validate confirm_password
     var msgConfirmCheckingPassword = document.getElementById("msgChekingConfirmPassword");
     confirmPassword.onkeyup = validateConfirmPassword;
 
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-//Kiểm tra Fist Name
+//Validate Fist Name
     var msgChekingFirstName = document.getElementById("msgChekingFirstName");
     firstName.onkeyup = validateFirstName;
 
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-//Kiểm tra Last Name
+//Validate Last Name
     var msgChekingLastName = document.getElementById("msgChekingLastName");
     lastName.onkeyup = validateLastName;
 
@@ -156,6 +156,23 @@ document.addEventListener("DOMContentLoaded", function () {
             msgChekingLastName.innerText = "*valid";
         }
     }
+
+//Upload file avatar
+    var btnAvatar = document.getElementById("btnAvatar")
+    var myWidget_Avatar = cloudinary.createUploadWidget({
+            cloudName: 'quynv300192',
+            uploadPreset: 'qivdh8qo'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                console.log('Done! Here is the image info: ', result.info);
+                console.log(result.info.url)
+                document.getElementById("avatar").value = result.info.url;
+            }
+        }
+    )
+    btnAvatar.addEventListener("click", function () {
+        myWidget_Avatar.open();
+    }, false);
 })
 
 

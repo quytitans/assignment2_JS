@@ -1,28 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
     var tokenKey = sessionStorage.getItem("vie");
-    const API_DOMAIN = "https://2-dot-backup-server-003.appspot.com";
+    var loginChecking = sessionStorage.getItem("vie2")
+    if (loginChecking !== "y") {
+        document.getElementById("loadingIcon").style.display = "none"
+        document.getElementById("viewSongsLink").style.display = "none"
+        document.getElementById("loginLink").style.display = ""
+        document.getElementById("txtNoitification").innerText = "Please login first"
+        $('#NoitiModal').modal({
+            show: true
+        })
+    }
+    const API_DOMAIN = "https://2-dot-backup-server-001.appspot.com";
     const CREATE_SONG_PATH = "/_api/v2/songs";
-    var name = document.getElementById("name");
-    var singer = document.getElementById("singer");
-    var author = document.getElementById("author");
-    var urlThumbnail = document.getElementById("thumbnail");
-    var urlLink = document.getElementById("link");
     var btnCreate = document.getElementById("create");
+    var btnHome = document.getElementById("homepage02");
+    btnHome.onclick = function () {
+        window.location.href = "homePage.html";
+    };
 
-
-// -----------------------------------------------------------------------------
 //Gửi data đi on button click;
     btnCreate.onclick = function () {
-        var txtName = name.value;
-        var txtSinger = singer.value;
-        var txtAuthor = author.value;
-        var txtThumbnail = urlThumbnail.value;
-        var txtLink = urlLink.value;
+        document.getElementById("loadingIcon").style.display = ""
+        var txtName = document.getElementById("name").value;
+        var txtSinger = document.getElementById("singer").value;
+        var txtAuthor = document.getElementById("author").value;
+        var txtThumbnail = document.getElementById("thumbnail").value;
+        var txtLink = document.getElementById("link").value;
 
+// check null
         if (txtName === "" || txtSinger === "" || txtAuthor === "" || txtThumbnail === "" || txtLink === "") {
-            alert("please complete full information")
+            document.getElementById("loadingIcon").style.display = "none"
+            document.getElementById("txtNoitification").innerText = "Please complete all info"
+            $('#NoitiModal').modal({
+                show: true
+            })
+
         } else {
-            // JS object
+// JS object
             var sendData = {
                 name: txtName,
                 singer: txtSinger,
@@ -30,21 +44,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 thumbnail: txtThumbnail,
                 link: txtLink
             }
-            //Chuyen data sang JSon Obj
+// Json obj
             var JSonDataSend = JSON.stringify(sendData);
-            //khởi tạo biến, mở kết nối, tạo header ... và chuyển dữ liệu trả về sang JS object;
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status === 201) {
-                        //ket qua tra ve duoc chuyen sang dinh dang JS object;
-                        var responseJSobj = JSON.parse(this.responseText);
-                        alert(`Register successfully, your ID is:+${responseJSobj.id}`)
-                    }else {
+                        document.getElementById("loadingIcon").style.display = "none"
+                        document.getElementById("viewSongsLink").style.display = ""
+                        document.getElementById("loginLink").style.display = "none"
+                        document.getElementById("txtNoitification").innerText = "Create success"
+                        $('#NoitiModal').modal({show: true})
+                    } else {
+                        document.getElementById("loadingIcon").style.display = "none"
                         console.log("co loi xay ra hay kiem tra lai");
-                        $('#exampleModal').modal({
-                            show: true
-                        })
+                        document.getElementById("txtNoitification").innerText = "Upload failed, login fist or check your internet connection"
+                        document.getElementById("viewSongsLink").style.display = "none"
+                        document.getElementById("loginLink").style.display = ""
+                        $('#NoitiModal').modal({show: true})
                     }
                 }
             }
@@ -55,100 +72,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
     }
-//
-//
-//
-//
-//
-// // validation-------------------------------------------------------------------
-// //kiem tra email
-//     var msgChekingEmail = document.getElementById("msgChekingEmail");
-//     email.onkeyup = validateEmail;
-//
-//     function validateEmail() {
-//         var txtEmail1 = email.value;
-//         var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-//
-//         if (txtEmail1.match(mailformat)) {
-//             msgChekingEmail.className = "msgsuccess"
-//             msgChekingEmail.innerText = "*valid";
-//         } else {
-//             msgChekingEmail.className = "msgerror"
-//             msgChekingEmail.innerText = "*invalid";
-//         }
-//     }
-//
-// //Kiểm tra password
-//     var msgCheckingPassword = document.getElementById("msgChekingPassword");
-//     password.onkeyup = validatePassword;
-//
-//     function validatePassword() {
-//         var txtPassword = password.value;
-//         if (txtPassword.length === 0) {
-//             msgCheckingPassword.className = "msgerror"
-//             msgCheckingPassword.innerText = "*please enter password";
-//         } else if (txtPassword.length < 5) {
-//             msgCheckingPassword.className = "msgerror"
-//             msgCheckingPassword.innerText = "*password too short";
-//         } else {
-//             msgCheckingPassword.className = "msgsuccess"
-//             msgCheckingPassword.innerText = "*valid";
-//         }
-//     }
-//
-// // Kiểm tra confirm_password
-//     var msgConfirmCheckingPassword = document.getElementById("msgChekingConfirmPassword");
-//     confirmPassword.onkeyup = validateConfirmPassword;
-//
-//     function validateConfirmPassword() {
-//         var txtConfirmPassword = confirmPassword.value;
-//         var txtPassword = password.value;
-//         if (txtConfirmPassword === txtPassword) {
-//             msgConfirmCheckingPassword.className = "msgsuccess"
-//             msgConfirmCheckingPassword.innerText = "*correct";
-//         } else {
-//             msgConfirmCheckingPassword.className = "msgerror"
-//             msgConfirmCheckingPassword.innerText = "*re-enter password";
-//         }
-//     }
-//
-// //Kiểm tra Fist Name
-//     var msgChekingFirstName = document.getElementById("msgChekingFirstName");
-//     firstName.onkeyup = validateFirstName;
-//
-//     function validateFirstName() {
-//         var txtFirstName = firstName.value;
-//         if (txtFirstName.length === 0) {
-//             msgChekingFirstName.className = "msgerror"
-//             msgChekingFirstName.innerText = "*please enter your first name";
-//         } else if (txtFirstName.length < 2) {
-//             msgChekingFirstName.className = "msgerror"
-//             msgChekingFirstName.innerText = "*your name too short";
-//         } else {
-//             msgChekingFirstName.className = "msgsuccess"
-//             msgChekingFirstName.innerText = "*valid";
-//         }
-//     }
-//
-// //Kiểm tra Last Name
-//     var msgChekingLastName = document.getElementById("msgChekingLastName");
-//     lastName.onkeyup = validateLastName;
-//
-//     function validateLastName() {
-//         var txtLasttName = lastName.value;
-//         if (txtLasttName.length === 0) {
-//             msgChekingLastName.className = "msgerror"
-//             msgChekingLastName.innerText = "*please enter your first name";
-//         } else if (txtLasttName.length < 2) {
-//             msgChekingLastName.className = "msgerror"
-//             msgChekingLastName.innerText = "*your name too short";
-//         } else {
-//             msgChekingLastName.className = "msgsuccess"
-//             msgChekingLastName.innerText = "*valid";
-//         }
-//     }
-//
-
+// upload file Thumnail
+    var btnThumnailLink = document.getElementById("btnThunailLink")
+    var myWidget_thumnail = cloudinary.createUploadWidget({
+            cloudName: 'quynv300192',
+            uploadPreset: 'qivdh8qo'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                console.log('Done! Here is the image info: ', result.info);
+                console.log(result.info.url)
+                document.getElementById("thumbnail").value = result.info.url;
+            }
+        }
+    )
+    btnThumnailLink.addEventListener("click", function () {
+        myWidget_thumnail.open();
+    }, false);
+// upload file mp3
+    var btnMp3Link = document.getElementById("btnMp3Link")
+    var myWidget_mp3 = cloudinary.createUploadWidget({
+            cloudName: 'quynv300192',
+            uploadPreset: 'qivdh8qo'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                console.log('Done! Here is the image info: ', result.info);
+                console.log(result.info.url)
+                document.getElementById("link").value = result.info.url;
+            }
+        }
+    )
+    btnMp3Link.addEventListener("click", function () {
+        myWidget_mp3.open();
+    }, false);
 })
 
 

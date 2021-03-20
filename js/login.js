@@ -1,55 +1,49 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var checkNull = true;
-    const API_DOMAIN = "https://2-dot-backup-server-003.appspot.com";
+    const API_DOMAIN = "https://2-dot-backup-server-001.appspot.com";
     const LOGIN_PATH = "/_api/v2/members/authentication";
     var email = document.getElementById("email");
     var password = document.getElementById("password")
     var btnLogin = document.getElementById("login")
-// -----------------------------------------------------------------------------
+    var btnRegister = document.getElementById("register")
 //Gửi data đi on button click;
+    btnRegister.onclick = function () {
+        window.location.href = "register.html";
+    };
     btnLogin.onclick = function () {
+        document.getElementById("loadingIcon").style.display = ""
         var txtEmail = email.value;
         var txtPassword = password.value;
-        if (txtPassword === "" ||txtEmail === "") {
-            alert("vui long nhap du thong tin")
+        if (txtPassword === "" || txtEmail === "") {
+            document.getElementById("loadingIcon").style.display = "none"
+            console.log("Please fill all information");
+            $('#faileModal').modal({show: true})
         } else {
-            // JS object
             var sendData = {
                 password: txtPassword,
                 email: txtEmail
             }
-            //Chuyen data sang JSon Obj
             var JSonDataSend = JSON.stringify(sendData);
-            //khởi tạo biến, mở kết nối, tạo header ... và chuyển dữ liệu trả về sang JS object;
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status === 201) {
-                        //ket qua tra ve duoc chuyen sang dinh dang JS object;
                         var responseJSobj = JSON.parse(this.responseText);
-                        //lưu token key ra sesstion storage hoặc local storage. lưu vào bằng setItem, lấy ra bằng getItem
-                        sessionStorage.setItem("vie",responseJSobj.token);
+                        sessionStorage.setItem("vie", responseJSobj.token);
+                        sessionStorage.setItem("vie2", "y");
                         window.location.href = "homePage.html";
-                    }else {
+                        document.getElementById("loadingIcon").style.display = "none"
+                    } else {
+                        document.getElementById("loadingIcon").style.display = "none"
                         console.log("co loi xay ra hay kiem tra lai");
-                        $('#faileModal').modal({
-                            show: true
-                        })
+                        $('#faileModal').modal({show: true})
                     }
                 }
             }
             xhr.open("POST", API_DOMAIN + LOGIN_PATH);
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.send(JSonDataSend);
-
         }
     }
-
-
-
-
-
-// validation-------------------------------------------------------------------
 //kiem tra email
     var msgChekingEmail = document.getElementById("msgChekingEmail");
     email.onkeyup = validateEmail;
@@ -84,10 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
             msgCheckingPassword.innerText = "*valid";
         }
     }
-
-
-
-// end of everythings
 })
 
 
