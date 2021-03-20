@@ -3,20 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Songs I Like</title>
+    <title>Login</title>
+    <link rel="shortcut icon"
+          href="https://res.cloudinary.com/quynv300192/image/upload/v1615912707/HTML_CSS_JS_Assignment02/NYC_logo-removebg_o1p6qw.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/register.css">
 </head>
-<body class="bg-page">
-    <div class="col-12 col-sm-8 mainBody container-fluid ">
+<body class="bgBody">
+<div class="container-sm">
+    <div class="row mainBody center">
         <div class="col-12 col-sm-12 col-md-12">
-            <h1 class="txtinsetshadow">NYC Welcome</h1>
-            <h2 class="">"Better song better soul"</h2>
+            <div class="row" style="height: fit-content">
+                <div class="col-5 col-sm-4 col-md-2">
+                    <img class="logo align-middle container-fluid center"
+                         src="https://res.cloudinary.com/quynv300192/image/upload/v1615912707/HTML_CSS_JS_Assignment02/NYC_logo-removebg_o1p6qw.png"
+                         alt="">
+                </div>
+                <div class="btn-group  container-fluid row col-7 col-sm-8 col-md-10 center" role="group">
+                    <h1 class="txtinsetshadow row col-12 col-sm-12">NYC Welcome</h1>
+                    <h2 class="row col-12 col-sm-12">"Better song better soul"</h2>
+                    <!--        thông báo trạng thái loading-->
+                    <div class="spinner-border text-primary center" role="status" style="display:none" id="loadingIcon">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <form action="#" name="mainForm">
-            <div class="form-row col-12 col-sm-12 col-md-12">
+            <div class="form-row">
                 <div class="form-group col-12 col-sm-6">
                     <label>Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Email">
@@ -28,43 +44,38 @@
                     <span id="msgChekingPassword"></span>
                 </div>
             </div>
-            <div class="form-row divMain col-12 col-sm-12 col-md-12">
+            <div class="form-row">
                 <div class="form-group col-12 col-sm-12">
-                    <input class="btn btn-primary btn-lg" type="button" value="Login" id="login">
-                    <input class="btn btn-primary btn-lg" type="reset" value="Reset Form" id="resetInformation">
-                    <input class="btn btn-primary btn-lg" type="reset" value="Register" id="register" onclick="location.href='register.html';">
+                    <button class="form-control col-4 col-sm-4" type="button" value="login" id="login">Login</button>
+                    <button class="form-control col-4 col-sm-4" type="reset" value="Reset Form"
+                            id="resetInformation">Reset Form
+                    </button>
+                    <button class="form-control col-4 col-sm-4" type="button" id="register">Register</button>
                 </div>
             </div>
-            <div class="divBlock"><a href="register.html" >Resgister new account</a></div>
-            <div class="divBlock"><a href="get-my-song.html" >Get my songs</a></div>
-            <div class="divBlock"><a href="createSong.html" >Create new song</a></div>
-            <div class="divBlock"><a href="lastestSong_homepage.html">Back to home page</a></div>
-            <div class="divBlock"><a href="member-information.html">My Infomation</a></div>
-
+            <div class="divBlock"><a href="register.html">Resgister new account</a></div>
+            <div class="divBlock"><a href="homePage.html">Back to home page</a></div>
         </form>
-
-        <!-- Modal thông báo đăng kí thất bại -->
-        <div class="modal fade" id="faileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h2 class="valiModalFaile">Login failed, please try again</h2>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="divBlock"><a href="lastestSong_homepage.html">Home page</a></div>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+    </div>
+</div>
+<!--    modal thong bao-->
+<div class="modal fade" id="faileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2 class="valiModal">Login failed, please try again</h2>
+            </div>
+            <div class="modal-footer">
+                <div class="divBlock"><a href="homePage.html">Home page</a></div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
-
-
+</div>
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/login.js"></script>
