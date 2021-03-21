@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+$(document).ready(function (){
     const API_DOMAIN = "https://2-dot-backup-server-001.appspot.com";
     const MY_INFO_PATH = "/_api/v2/members/information";
     var tokenKey = sessionStorage.getItem("vie");
@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var btnRegister = document.getElementById("btnRegister")
     var loginChecking = sessionStorage.getItem("vie2")
     if (loginChecking !== "y"){
-    btnNowLogin.style.display = ""
-    btnRegister.style.display = ""
+        btnNowLogin.style.display = ""
+        btnRegister.style.display = ""
     }else {
         btnMyinfo.style.display = ""
         btnMySongs.style.display = ""
@@ -68,5 +68,4 @@ document.addEventListener("DOMContentLoaded", function () {
     btnRegister.onclick = function(){
         window.location.href = "register.html";
     }
-
 })
